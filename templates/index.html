@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Search Leetcode Questions</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+
+    .form-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    input[type="text"] {
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 300px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #0077cc;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #005fa3;
+    }
+
+    .results {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .result-item {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .result-item a {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #0077cc;
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    .result-item a:hover {
+      text-decoration: underline;
+    }
+
+    .score {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .no-results {
+      text-align: center;
+      font-style: italic;
+      color: #777;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form method="POST" novalidate>
+      {{ form.hidden_tag() }}
+      {{ form.search.label }}
+      {{ form.search(class="") }}
+      {{ form.submit(class="") }}
+    </form>
+  </div>
+
+  <div class="results">
+    {% if results %}
+      {% for result in results %}
+        <div class="result-item">
+          <a href="{{ result['Question Link'] }}" target="_blank" rel="noopener noreferrer">
+            {{ result['Question Link'] }}
+          </a>
+          <p class="score">Score: {{ "%.4f"|format(result['Score']) }}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="no-results">No matching questions found. Try different search terms.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
